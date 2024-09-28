@@ -10,7 +10,7 @@ Public Class form1
             Dim worksheet As ExcelWorksheet = package.Workbook.Worksheets(0)
             Dim dt As New DataTable()
 
-            ' Leer encabezadoss
+            ' Leer encabezadosssd
             For Each headerCell In worksheet.Cells(1, 1, 1, worksheet.Dimension.End.Column)
                 dt.Columns.Add(headerCell.Text)
             Next

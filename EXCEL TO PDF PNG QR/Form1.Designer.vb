@@ -48,7 +48,7 @@ Partial Class Form1
         ' 
         Button1.Location = New Point(23, 102)
         Button1.Name = "Button1"
-        Button1.Size = New Size(81, 29)
+        Button1.Size = New Size(149, 29)
         Button1.TabIndex = 0
         Button1.Text = "Extraer"
         Button1.UseVisualStyleBackColor = True
