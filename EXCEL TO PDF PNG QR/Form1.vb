@@ -1,7 +1,6 @@
 ﻿Imports OfficeOpenXml
 Imports System.IO
 Imports QRCoder
-Imports Org.BouncyCastle.Crypto
 Public Class form1
     Private Sub LoadExcelData()
         ExcelPackage.LicenseContext = LicenseContext.NonCommercial
@@ -29,7 +28,6 @@ Public Class form1
     End Sub
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
 
-        LoadExcelData()
     End Sub
 
     Private Function GenerateQRCode(data As String) As Bitmap
@@ -57,13 +55,13 @@ Public Class form1
                 For Each row As DataGridViewRow In DataGridView1.Rows
                     If Not row.IsNewRow Then
                         ' Concatenar los datos para el código QR
-                        Dim qrData As String = String.Join("<ht>", row.Cells.Cast(Of DataGridViewCell).Select(Function(c)
-                                                                                                                  If c.Value IsNot Nothing Then
-                                                                                                                      Return c.Value.ToString()
-                                                                                                                  Else
-                                                                                                                      Return String.Empty
-                                                                                                                  End If
-                                                                                                              End Function)) & vbCrLf
+                        Dim qrData As String = String.Join(vbTab, row.Cells.Cast(Of DataGridViewCell).Select(Function(c)
+                                                                                                                 If c.Value IsNot Nothing Then
+                                                                                                                     Return c.Value.ToString()
+                                                                                                                 Else
+                                                                                                                     Return String.Empty
+                                                                                                                 End If
+                                                                                                             End Function))
 
                         ' Generar el código QR para los datos concatenados
                         Dim qrCodeImage As Bitmap = GenerateQRCode(qrData)
@@ -136,6 +134,8 @@ Public Class form1
     Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
         OpenFileDialog1.ShowDialog()
         TextBox1.Text = OpenFileDialog1.FileName
+
+        LoadExcelData()
     End Sub
 
 
