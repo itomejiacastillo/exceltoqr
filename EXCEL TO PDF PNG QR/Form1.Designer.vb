@@ -23,9 +23,17 @@ Partial Class Form1
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(form1))
-        Button2 = New Button()
-        DataGridView1 = New DataGridView()
         OpenFileDialog1 = New OpenFileDialog()
+        TabPage3 = New TabPage()
+        GroupBox11 = New GroupBox()
+        Button2 = New Button()
+        GroupBox2 = New GroupBox()
+        Button6 = New Button()
+        Button5 = New Button()
+        Button4 = New Button()
+        Button1 = New Button()
+        btnUpdatePreview = New Button()
+        pbPreview = New PictureBox()
         GroupBox1 = New GroupBox()
         cbxNegrita = New CheckBox()
         GroupBox10 = New GroupBox()
@@ -58,22 +66,19 @@ Partial Class Form1
         Label13 = New Label()
         Label12 = New Label()
         Label9 = New Label()
-        ProgressBar1 = New ProgressBar()
-        Label7 = New Label()
-        TabControl1 = New TabControl()
         TabPage2 = New TabPage()
         Label1 = New Label()
         TextBox1 = New TextBox()
         Button3 = New Button()
-        TabPage3 = New TabPage()
-        GroupBox2 = New GroupBox()
-        Button6 = New Button()
-        Button5 = New Button()
-        Button4 = New Button()
-        Button1 = New Button()
-        btnUpdatePreview = New Button()
-        pbPreview = New PictureBox()
-        CType(DataGridView1, ComponentModel.ISupportInitialize).BeginInit()
+        DataGridView1 = New DataGridView()
+        TabControl1 = New TabControl()
+        ProgressBar1 = New ProgressBar()
+        Label7 = New Label()
+        GroupBox5 = New GroupBox()
+        TabPage3.SuspendLayout()
+        GroupBox11.SuspendLayout()
+        GroupBox2.SuspendLayout()
+        CType(pbPreview, ComponentModel.ISupportInitialize).BeginInit()
         GroupBox1.SuspendLayout()
         GroupBox10.SuspendLayout()
         GroupBox9.SuspendLayout()
@@ -86,42 +91,138 @@ Partial Class Form1
         CType(txtMargenes, ComponentModel.ISupportInitialize).BeginInit()
         GroupBox4.SuspendLayout()
         GroupBox3.SuspendLayout()
-        TabControl1.SuspendLayout()
         TabPage2.SuspendLayout()
-        TabPage3.SuspendLayout()
-        GroupBox2.SuspendLayout()
-        CType(pbPreview, ComponentModel.ISupportInitialize).BeginInit()
+        CType(DataGridView1, ComponentModel.ISupportInitialize).BeginInit()
+        TabControl1.SuspendLayout()
+        GroupBox5.SuspendLayout()
         SuspendLayout()
+        ' 
+        ' OpenFileDialog1
+        ' 
+        OpenFileDialog1.FileName = "OpenFileDialog1"
+        ' 
+        ' TabPage3
+        ' 
+        TabPage3.Controls.Add(GroupBox11)
+        TabPage3.Controls.Add(GroupBox2)
+        TabPage3.Controls.Add(GroupBox1)
+        TabPage3.Location = New Point(4, 24)
+        TabPage3.Name = "TabPage3"
+        TabPage3.Padding = New Padding(3)
+        TabPage3.Size = New Size(809, 685)
+        TabPage3.TabIndex = 2
+        TabPage3.Text = "Propiedades de la Etiqueta"
+        TabPage3.UseVisualStyleBackColor = True
+        ' 
+        ' GroupBox11
+        ' 
+        GroupBox11.Controls.Add(Button2)
+        GroupBox11.Dock = DockStyle.Bottom
+        GroupBox11.Location = New Point(3, 627)
+        GroupBox11.Name = "GroupBox11"
+        GroupBox11.Size = New Size(803, 55)
+        GroupBox11.TabIndex = 18
+        GroupBox11.TabStop = False
         ' 
         ' Button2
         ' 
+        Button2.Anchor = AnchorStyles.None
         Button2.BackColor = SystemColors.ButtonHighlight
         Button2.BackgroundImageLayout = ImageLayout.Zoom
+        Button2.Enabled = False
         Button2.Image = CType(resources.GetObject("Button2.Image"), Image)
         Button2.ImageAlign = ContentAlignment.MiddleLeft
-        Button2.Location = New Point(315, 628)
+        Button2.Location = New Point(315, 13)
         Button2.Margin = New Padding(5, 3, 5, 3)
         Button2.Name = "Button2"
         Button2.Padding = New Padding(20, 5, 20, 5)
-        Button2.Size = New Size(186, 35)
+        Button2.Size = New Size(186, 36)
         Button2.TabIndex = 1
         Button2.Text = "Generar codigos QR"
         Button2.TextAlign = ContentAlignment.MiddleRight
         Button2.UseVisualStyleBackColor = False
         ' 
-        ' DataGridView1
+        ' GroupBox2
         ' 
-        DataGridView1.BackgroundColor = SystemColors.ControlLight
-        DataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        DataGridView1.Dock = DockStyle.Bottom
-        DataGridView1.Location = New Point(3, 86)
-        DataGridView1.Name = "DataGridView1"
-        DataGridView1.Size = New Size(803, 598)
-        DataGridView1.TabIndex = 2
+        GroupBox2.Anchor = AnchorStyles.Top Or AnchorStyles.Bottom Or AnchorStyles.Left Or AnchorStyles.Right
+        GroupBox2.Controls.Add(Button6)
+        GroupBox2.Controls.Add(Button5)
+        GroupBox2.Controls.Add(Button4)
+        GroupBox2.Controls.Add(Button1)
+        GroupBox2.Controls.Add(btnUpdatePreview)
+        GroupBox2.Controls.Add(pbPreview)
+        GroupBox2.Location = New Point(3, 129)
+        GroupBox2.Name = "GroupBox2"
+        GroupBox2.Size = New Size(803, 503)
+        GroupBox2.TabIndex = 13
+        GroupBox2.TabStop = False
+        GroupBox2.Text = "Vista previa de la etiqueta:"
         ' 
-        ' OpenFileDialog1
+        ' Button6
         ' 
-        OpenFileDialog1.FileName = "OpenFileDialog1"
+        Button6.Anchor = AnchorStyles.Bottom
+        Button6.Font = New Font("Segoe UI", 11F)
+        Button6.Location = New Point(452, 455)
+        Button6.Name = "Button6"
+        Button6.Size = New Size(38, 40)
+        Button6.TabIndex = 17
+        Button6.Text = "⏩"
+        Button6.UseVisualStyleBackColor = True
+        ' 
+        ' Button5
+        ' 
+        Button5.Anchor = AnchorStyles.Bottom
+        Button5.Font = New Font("Segoe UI", 11F)
+        Button5.Location = New Point(320, 455)
+        Button5.Name = "Button5"
+        Button5.Size = New Size(38, 40)
+        Button5.TabIndex = 16
+        Button5.Text = "⏪"
+        Button5.UseVisualStyleBackColor = True
+        ' 
+        ' Button4
+        ' 
+        Button4.Anchor = AnchorStyles.Bottom
+        Button4.Font = New Font("Segoe UI", 11F)
+        Button4.Location = New Point(364, 455)
+        Button4.Name = "Button4"
+        Button4.Size = New Size(38, 40)
+        Button4.TabIndex = 15
+        Button4.Text = "◀️"
+        Button4.UseVisualStyleBackColor = True
+        ' 
+        ' Button1
+        ' 
+        Button1.Anchor = AnchorStyles.Bottom
+        Button1.Font = New Font("Segoe UI", 11F)
+        Button1.Location = New Point(408, 455)
+        Button1.Name = "Button1"
+        Button1.Size = New Size(38, 40)
+        Button1.TabIndex = 14
+        Button1.Text = "▶️"
+        Button1.UseVisualStyleBackColor = True
+        ' 
+        ' btnUpdatePreview
+        ' 
+        btnUpdatePreview.Anchor = AnchorStyles.Bottom Or AnchorStyles.Right
+        btnUpdatePreview.Location = New Point(685, 460)
+        btnUpdatePreview.Name = "btnUpdatePreview"
+        btnUpdatePreview.Size = New Size(103, 32)
+        btnUpdatePreview.TabIndex = 14
+        btnUpdatePreview.Text = "Actualizar"
+        btnUpdatePreview.UseVisualStyleBackColor = True
+        ' 
+        ' pbPreview
+        ' 
+        pbPreview.BackColor = Color.Gainsboro
+        pbPreview.BorderStyle = BorderStyle.FixedSingle
+        pbPreview.Dock = DockStyle.Fill
+        pbPreview.Location = New Point(3, 19)
+        pbPreview.Name = "pbPreview"
+        pbPreview.Size = New Size(797, 481)
+        pbPreview.SizeMode = PictureBoxSizeMode.CenterImage
+        pbPreview.TabIndex = 12
+        pbPreview.TabStop = False
         ' 
         ' GroupBox1
         ' 
@@ -487,36 +588,6 @@ Partial Class Form1
         Label9.TabIndex = 9
         Label9.Text = "Tamaño:"
         ' 
-        ' ProgressBar1
-        ' 
-        ProgressBar1.BackColor = SystemColors.ControlDarkDark
-        ProgressBar1.Dock = DockStyle.Bottom
-        ProgressBar1.Location = New Point(0, 750)
-        ProgressBar1.Name = "ProgressBar1"
-        ProgressBar1.Size = New Size(817, 16)
-        ProgressBar1.TabIndex = 10
-        ProgressBar1.Visible = False
-        ' 
-        ' Label7
-        ' 
-        Label7.AutoSize = True
-        Label7.Location = New Point(333, 724)
-        Label7.Name = "Label7"
-        Label7.Size = New Size(152, 15)
-        Label7.TabIndex = 11
-        Label7.Text = "© Emmanuel Mejía Castillo"
-        ' 
-        ' TabControl1
-        ' 
-        TabControl1.Controls.Add(TabPage2)
-        TabControl1.Controls.Add(TabPage3)
-        TabControl1.Dock = DockStyle.Top
-        TabControl1.Location = New Point(0, 0)
-        TabControl1.Name = "TabControl1"
-        TabControl1.SelectedIndex = 0
-        TabControl1.Size = New Size(817, 715)
-        TabControl1.TabIndex = 12
-        ' 
         ' TabPage2
         ' 
         TabPage2.Controls.Add(Label1)
@@ -526,7 +597,7 @@ Partial Class Form1
         TabPage2.Location = New Point(4, 24)
         TabPage2.Name = "TabPage2"
         TabPage2.Padding = New Padding(3)
-        TabPage2.Size = New Size(809, 687)
+        TabPage2.Size = New Size(809, 685)
         TabPage2.TabIndex = 1
         TabPage2.Text = "Datos"
         TabPage2.UseVisualStyleBackColor = True
@@ -549,6 +620,7 @@ Partial Class Form1
         ' 
         ' Button3
         ' 
+        Button3.Anchor = AnchorStyles.Top Or AnchorStyles.Right
         Button3.Font = New Font("Segoe UI", 10F)
         Button3.Location = New Point(695, 41)
         Button3.Name = "Button3"
@@ -557,108 +629,74 @@ Partial Class Form1
         Button3.Text = "🔍 Buscar"
         Button3.UseVisualStyleBackColor = True
         ' 
-        ' TabPage3
+        ' DataGridView1
         ' 
-        TabPage3.Controls.Add(GroupBox2)
-        TabPage3.Controls.Add(GroupBox1)
-        TabPage3.Controls.Add(Button2)
-        TabPage3.Location = New Point(4, 24)
-        TabPage3.Name = "TabPage3"
-        TabPage3.Padding = New Padding(3)
-        TabPage3.Size = New Size(809, 687)
-        TabPage3.TabIndex = 2
-        TabPage3.Text = "Propiedades de la Etiqueta"
-        TabPage3.UseVisualStyleBackColor = True
+        DataGridView1.Anchor = AnchorStyles.Top Or AnchorStyles.Bottom Or AnchorStyles.Left Or AnchorStyles.Right
+        DataGridView1.BackgroundColor = SystemColors.ControlLight
+        DataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        DataGridView1.Location = New Point(3, 84)
+        DataGridView1.Name = "DataGridView1"
+        DataGridView1.Size = New Size(803, 598)
+        DataGridView1.TabIndex = 2
         ' 
-        ' GroupBox2
+        ' TabControl1
         ' 
-        GroupBox2.Controls.Add(Button6)
-        GroupBox2.Controls.Add(Button5)
-        GroupBox2.Controls.Add(Button4)
-        GroupBox2.Controls.Add(Button1)
-        GroupBox2.Controls.Add(btnUpdatePreview)
-        GroupBox2.Controls.Add(pbPreview)
-        GroupBox2.Location = New Point(2, 133)
-        GroupBox2.Name = "GroupBox2"
-        GroupBox2.Size = New Size(803, 475)
-        GroupBox2.TabIndex = 13
-        GroupBox2.TabStop = False
-        GroupBox2.Text = "Vista previa de la etiqueta:"
+        TabControl1.Anchor = AnchorStyles.Top Or AnchorStyles.Bottom Or AnchorStyles.Left Or AnchorStyles.Right
+        TabControl1.Controls.Add(TabPage2)
+        TabControl1.Controls.Add(TabPage3)
+        TabControl1.Location = New Point(0, 0)
+        TabControl1.Name = "TabControl1"
+        TabControl1.SelectedIndex = 0
+        TabControl1.Size = New Size(817, 713)
+        TabControl1.TabIndex = 12
         ' 
-        ' Button6
+        ' ProgressBar1
         ' 
-        Button6.Font = New Font("Segoe UI", 11F)
-        Button6.Location = New Point(455, 425)
-        Button6.Name = "Button6"
-        Button6.Size = New Size(38, 40)
-        Button6.TabIndex = 17
-        Button6.Text = "⏩"
-        Button6.UseVisualStyleBackColor = True
+        ProgressBar1.BackColor = SystemColors.ControlDarkDark
+        ProgressBar1.Dock = DockStyle.Bottom
+        ProgressBar1.Location = New Point(3, 37)
+        ProgressBar1.Name = "ProgressBar1"
+        ProgressBar1.Size = New Size(811, 16)
+        ProgressBar1.TabIndex = 10
+        ProgressBar1.Visible = False
         ' 
-        ' Button5
+        ' Label7
         ' 
-        Button5.Font = New Font("Segoe UI", 11F)
-        Button5.Location = New Point(323, 425)
-        Button5.Name = "Button5"
-        Button5.Size = New Size(38, 40)
-        Button5.TabIndex = 16
-        Button5.Text = "⏪"
-        Button5.UseVisualStyleBackColor = True
+        Label7.Anchor = AnchorStyles.None
+        Label7.AutoSize = True
+        Label7.Location = New Point(332, 16)
+        Label7.Name = "Label7"
+        Label7.Size = New Size(152, 15)
+        Label7.TabIndex = 11
+        Label7.Text = "© Emmanuel Mejía Castillo"
         ' 
-        ' Button4
+        ' GroupBox5
         ' 
-        Button4.Font = New Font("Segoe UI", 11F)
-        Button4.Location = New Point(367, 425)
-        Button4.Name = "Button4"
-        Button4.Size = New Size(38, 40)
-        Button4.TabIndex = 15
-        Button4.Text = "◀️"
-        Button4.UseVisualStyleBackColor = True
-        ' 
-        ' Button1
-        ' 
-        Button1.Font = New Font("Segoe UI", 11F)
-        Button1.Location = New Point(411, 425)
-        Button1.Name = "Button1"
-        Button1.Size = New Size(38, 40)
-        Button1.TabIndex = 14
-        Button1.Text = "▶️"
-        Button1.UseVisualStyleBackColor = True
-        ' 
-        ' btnUpdatePreview
-        ' 
-        btnUpdatePreview.Location = New Point(688, 432)
-        btnUpdatePreview.Name = "btnUpdatePreview"
-        btnUpdatePreview.Size = New Size(103, 32)
-        btnUpdatePreview.TabIndex = 14
-        btnUpdatePreview.Text = "Actualizar"
-        btnUpdatePreview.UseVisualStyleBackColor = True
-        ' 
-        ' pbPreview
-        ' 
-        pbPreview.BackColor = Color.Gainsboro
-        pbPreview.BorderStyle = BorderStyle.FixedSingle
-        pbPreview.Dock = DockStyle.Fill
-        pbPreview.Location = New Point(3, 19)
-        pbPreview.Name = "pbPreview"
-        pbPreview.Size = New Size(797, 453)
-        pbPreview.SizeMode = PictureBoxSizeMode.CenterImage
-        pbPreview.TabIndex = 12
-        pbPreview.TabStop = False
+        GroupBox5.Controls.Add(Label7)
+        GroupBox5.Controls.Add(ProgressBar1)
+        GroupBox5.Dock = DockStyle.Bottom
+        GroupBox5.Location = New Point(0, 710)
+        GroupBox5.Name = "GroupBox5"
+        GroupBox5.Size = New Size(817, 56)
+        GroupBox5.TabIndex = 13
+        GroupBox5.TabStop = False
         ' 
         ' form1
         ' 
         AutoScaleDimensions = New SizeF(7F, 15F)
         AutoScaleMode = AutoScaleMode.Font
         ClientSize = New Size(817, 766)
+        Controls.Add(GroupBox5)
         Controls.Add(TabControl1)
-        Controls.Add(Label7)
-        Controls.Add(ProgressBar1)
         Icon = CType(resources.GetObject("$this.Icon"), Icon)
         Name = "form1"
         StartPosition = FormStartPosition.CenterScreen
         Text = "Generador de Codigos QR"
-        CType(DataGridView1, ComponentModel.ISupportInitialize).EndInit()
+        TabPage3.ResumeLayout(False)
+        TabPage3.PerformLayout()
+        GroupBox11.ResumeLayout(False)
+        GroupBox2.ResumeLayout(False)
+        CType(pbPreview, ComponentModel.ISupportInitialize).EndInit()
         GroupBox1.ResumeLayout(False)
         GroupBox1.PerformLayout()
         GroupBox10.ResumeLayout(False)
@@ -678,66 +716,66 @@ Partial Class Form1
         GroupBox4.PerformLayout()
         GroupBox3.ResumeLayout(False)
         GroupBox3.PerformLayout()
-        TabControl1.ResumeLayout(False)
         TabPage2.ResumeLayout(False)
         TabPage2.PerformLayout()
-        TabPage3.ResumeLayout(False)
-        TabPage3.PerformLayout()
-        GroupBox2.ResumeLayout(False)
-        CType(pbPreview, ComponentModel.ISupportInitialize).EndInit()
+        CType(DataGridView1, ComponentModel.ISupportInitialize).EndInit()
+        TabControl1.ResumeLayout(False)
+        GroupBox5.ResumeLayout(False)
+        GroupBox5.PerformLayout()
         ResumeLayout(False)
-        PerformLayout()
     End Sub
-    Friend WithEvents Button2 As Button
-    Friend WithEvents DataGridView1 As DataGridView
     Friend WithEvents OpenFileDialog1 As OpenFileDialog
-    Friend WithEvents GroupBox1 As GroupBox
-    Friend WithEvents ProgressBar1 As ProgressBar
-    Friend WithEvents Label7 As Label
-    Friend WithEvents TabControl1 As TabControl
-    Friend WithEvents TabPage2 As TabPage
     Friend WithEvents TabPage3 As TabPage
-    Friend WithEvents Label1 As Label
-    Friend WithEvents TextBox1 As TextBox
-    Friend WithEvents Button3 As Button
     Friend WithEvents GroupBox2 As GroupBox
-    Friend WithEvents pbPreview As PictureBox
+    Friend WithEvents GroupBox5 As GroupBox
+    Friend WithEvents Label7 As Label
+    Friend WithEvents ProgressBar1 As ProgressBar
+    Friend WithEvents Button6 As Button
+    Friend WithEvents Button5 As Button
+    Friend WithEvents Button4 As Button
+    Friend WithEvents Button1 As Button
     Friend WithEvents btnUpdatePreview As Button
-    Friend WithEvents Label12 As Label
-    Friend WithEvents Label9 As Label
-    Friend WithEvents Label13 As Label
-    Friend WithEvents Label15 As Label
-    Friend WithEvents txtQRAncho As TextBox
-    Friend WithEvents RadioButton1 As RadioButton
-    Friend WithEvents RadioButton3 As RadioButton
+    Friend WithEvents pbPreview As PictureBox
+    Friend WithEvents GroupBox1 As GroupBox
+    Friend WithEvents cbxNegrita As CheckBox
+    Public WithEvents GroupBox10 As GroupBox
+    Friend WithEvents cmbFont As ComboBox
+    Friend WithEvents GroupBox9 As GroupBox
+    Friend WithEvents Label5 As Label
+    Friend WithEvents txtTamanoFuente As NumericUpDown
+    Friend WithEvents Label3 As Label
+    Friend WithEvents GroupBox8 As GroupBox
+    Friend WithEvents lblcmalto As Label
+    Friend WithEvents txtAltoEtiq As NumericUpDown
+    Friend WithEvents Label2 As Label
+    Friend WithEvents GroupBox7 As GroupBox
+    Friend WithEvents lblcmancho As Label
+    Friend WithEvents txtAnchoEtiq As NumericUpDown
+    Friend WithEvents Label10 As Label
+    Friend WithEvents GroupBox6 As GroupBox
+    Friend WithEvents txtMargenes As NumericUpDown
+    Friend WithEvents Label8 As Label
     Friend WithEvents GroupBox4 As GroupBox
     Friend WithEvents txtQRAlto As TextBox
     Friend WithEvents RadioButton5 As RadioButton
     Friend WithEvents RadioButton6 As RadioButton
     Friend WithEvents Label14 As Label
     Friend WithEvents GroupBox3 As GroupBox
-    Friend WithEvents GroupBox6 As GroupBox
-    Friend WithEvents Label8 As Label
-    Friend WithEvents GroupBox8 As GroupBox
-    Friend WithEvents Label2 As Label
-    Friend WithEvents GroupBox7 As GroupBox
-    Friend WithEvents Label10 As Label
-    Friend WithEvents Label3 As Label
-    Friend WithEvents GroupBox9 As GroupBox
-    Friend WithEvents Label5 As Label
-    Friend WithEvents txtTamanoFuente As NumericUpDown
-    Friend WithEvents cmbFont As ComboBox
-    Friend WithEvents cbxNegrita As CheckBox
-    Friend WithEvents txtAnchoEtiq As NumericUpDown
-    Friend WithEvents txtAltoEtiq As NumericUpDown
-    Friend WithEvents txtMargenes As NumericUpDown
-    Public WithEvents GroupBox10 As GroupBox
-    Friend WithEvents lblcmancho As Label
-    Friend WithEvents lblcmalto As Label
-    Friend WithEvents Button6 As Button
-    Friend WithEvents Button5 As Button
-    Friend WithEvents Button4 As Button
-    Friend WithEvents Button1 As Button
+    Friend WithEvents txtQRAncho As TextBox
+    Friend WithEvents RadioButton1 As RadioButton
+    Friend WithEvents RadioButton3 As RadioButton
+    Friend WithEvents Label15 As Label
+    Friend WithEvents Label13 As Label
+    Friend WithEvents Label12 As Label
+    Friend WithEvents Label9 As Label
+    Friend WithEvents Button2 As Button
+    Friend WithEvents TabPage2 As TabPage
+    Friend WithEvents Label1 As Label
+    Friend WithEvents TextBox1 As TextBox
+    Friend WithEvents Button3 As Button
+    Friend WithEvents DataGridView1 As DataGridView
+    Friend WithEvents TabControl1 As TabControl
+    Friend WithEvents GroupBox11 As GroupBox
 
 
 End Class

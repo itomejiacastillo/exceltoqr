@@ -41,6 +41,7 @@ Public Class form1
 
         ' Ajustar la altura de las filas automáticamente
         DataGridView1.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells
+        Button2.Enabled = True
 
     End Sub
 
@@ -290,7 +291,6 @@ Public Class form1
     Private Sub Button3_Click_1(sender As Object, e As EventArgs) Handles Button3.Click
         OpenFileDialog1.ShowDialog()
         TextBox1.Text = OpenFileDialog1.FileName
-
         LoadExcelData()
         UpdatePreview()
     End Sub
