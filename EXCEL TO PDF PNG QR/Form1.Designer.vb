@@ -67,6 +67,10 @@ Partial Class Form1
         Button3 = New Button()
         TabPage3 = New TabPage()
         GroupBox2 = New GroupBox()
+        Button6 = New Button()
+        Button5 = New Button()
+        Button4 = New Button()
+        Button1 = New Button()
         btnUpdatePreview = New Button()
         pbPreview = New PictureBox()
         CType(DataGridView1, ComponentModel.ISupportInitialize).BeginInit()
@@ -568,6 +572,10 @@ Partial Class Form1
         ' 
         ' GroupBox2
         ' 
+        GroupBox2.Controls.Add(Button6)
+        GroupBox2.Controls.Add(Button5)
+        GroupBox2.Controls.Add(Button4)
+        GroupBox2.Controls.Add(Button1)
         GroupBox2.Controls.Add(btnUpdatePreview)
         GroupBox2.Controls.Add(pbPreview)
         GroupBox2.Location = New Point(2, 133)
@@ -577,9 +585,49 @@ Partial Class Form1
         GroupBox2.TabStop = False
         GroupBox2.Text = "Vista previa de la etiqueta:"
         ' 
+        ' Button6
+        ' 
+        Button6.Font = New Font("Segoe UI", 11F)
+        Button6.Location = New Point(455, 425)
+        Button6.Name = "Button6"
+        Button6.Size = New Size(38, 40)
+        Button6.TabIndex = 17
+        Button6.Text = "⏩"
+        Button6.UseVisualStyleBackColor = True
+        ' 
+        ' Button5
+        ' 
+        Button5.Font = New Font("Segoe UI", 11F)
+        Button5.Location = New Point(323, 425)
+        Button5.Name = "Button5"
+        Button5.Size = New Size(38, 40)
+        Button5.TabIndex = 16
+        Button5.Text = "⏪"
+        Button5.UseVisualStyleBackColor = True
+        ' 
+        ' Button4
+        ' 
+        Button4.Font = New Font("Segoe UI", 11F)
+        Button4.Location = New Point(367, 425)
+        Button4.Name = "Button4"
+        Button4.Size = New Size(38, 40)
+        Button4.TabIndex = 15
+        Button4.Text = "◀️"
+        Button4.UseVisualStyleBackColor = True
+        ' 
+        ' Button1
+        ' 
+        Button1.Font = New Font("Segoe UI", 11F)
+        Button1.Location = New Point(411, 425)
+        Button1.Name = "Button1"
+        Button1.Size = New Size(38, 40)
+        Button1.TabIndex = 14
+        Button1.Text = "▶️"
+        Button1.UseVisualStyleBackColor = True
+        ' 
         ' btnUpdatePreview
         ' 
-        btnUpdatePreview.Location = New Point(688, 429)
+        btnUpdatePreview.Location = New Point(688, 432)
         btnUpdatePreview.Name = "btnUpdatePreview"
         btnUpdatePreview.Size = New Size(103, 32)
         btnUpdatePreview.TabIndex = 14
@@ -686,6 +734,10 @@ Partial Class Form1
     Public WithEvents GroupBox10 As GroupBox
     Friend WithEvents lblcmancho As Label
     Friend WithEvents lblcmalto As Label
+    Friend WithEvents Button6 As Button
+    Friend WithEvents Button5 As Button
+    Friend WithEvents Button4 As Button
+    Friend WithEvents Button1 As Button
 
 
 End Class

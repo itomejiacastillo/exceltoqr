@@ -6,8 +6,6 @@ Imports iTextSharp.text
 Imports System.Drawing
 Imports System.Drawing.Text
 Imports System.Reflection
-
-
 Public Class form1
     Private isLoading As Boolean = True ' Flag para evitar disparar el evento al cargar
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -55,128 +53,6 @@ Public Class form1
         Return qrCode.GetGraphic(20, Color.Black, Color.White, drawQuietZones:=0)
 
     End Function
-    Private Sub GenerateAndExportQRCodes1()
-        ' Configuración inicial de la barra de progreso
-        ProgressBar1.Minimum = 0
-        ProgressBar1.Maximum = DataGridView1.Rows.Count
-        ProgressBar1.Value = 0
-        ProgressBar1.Step = 1
-
-        Using pdfDocument As New iTextSharp.text.Document(iTextSharp.text.PageSize.LETTER, txtMargenes.Value, txtMargenes.Value, txtMargenes.Value, txtMargenes.Value)
-            ' Ajustar el tamaño de la página según sea necesario
-            pdfDocument.SetPageSize(New iTextSharp.text.Rectangle(txtAnchoEtiq.Text, txtAltoEtiq.Value))
-
-            Using pdfWriter As iTextSharp.text.pdf.PdfWriter = iTextSharp.text.pdf.PdfWriter.GetInstance(pdfDocument, New FileStream("output.pdf", FileMode.Create))
-                pdfDocument.Open()
-
-                For Each row As DataGridViewRow In DataGridView1.Rows
-                    If Not row.IsNewRow Then
-                        ' Concatenar los datos para el código QR
-                        Dim qrData As String = String.Join(vbTab, row.Cells.Cast(Of DataGridViewCell).Select(Function(c)
-                                                                                                                 If c.Value IsNot Nothing Then
-                                                                                                                     Return c.Value.ToString()
-                                                                                                                 Else
-                                                                                                                     Return String.Empty
-                                                                                                                 End If
-                                                                                                             End Function))
-
-                        ' Generar el código QR para los datos concatenados
-                        Dim qrCodeImage As Bitmap = GenerateQRCode(qrData)
-
-                        ' Convertir la imagen QR a un objeto iTextSharp imagen
-                        Dim qrImage As iTextSharp.text.Image = iTextSharp.text.Image.GetInstance(qrCodeImage, System.Drawing.Imaging.ImageFormat.Png)
-
-                        ' Obtener el ancho disponible de la tabla en puntos
-                        Dim anchoDisponible As Single = pdfDocument.PageSize.Width - pdfDocument.LeftMargin - pdfDocument.RightMargin
-
-                        ' Ajustar el tamaño del QR al 100% del ancho disponible en la celda
-                        qrImage.ScaleAbsolute(anchoDisponible, anchoDisponible) ' Cuadrado: ancho = alto
-
-                        ' Crear una tabla para organizar el QR y el texto
-                        Dim table As New iTextSharp.text.pdf.PdfPTable(1)
-                        table.WidthPercentage = 100
-                        table.HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER
-
-                        ' Celda con el código QR
-                        Dim qrCell As New iTextSharp.text.pdf.PdfPCell(qrImage)
-                        qrCell.Border = iTextSharp.text.Rectangle.BOX
-                        qrCell.HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER
-                        qrCell.VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE
-                        table.AddCell(qrCell)
-
-                        ' Concatenar los datos para el texto
-                        Dim textData As String = String.Join(" | ", row.Cells.Cast(Of DataGridViewCell).Select(Function(c)
-                                                                                                                   If c.Value IsNot Nothing Then
-                                                                                                                       Return c.Value.ToString()
-                                                                                                                   Else
-                                                                                                                       Return String.Empty
-                                                                                                                   End If
-                                                                                                               End Function))
-                        ' Celda con el texto concatenado
-                        'Dim fuente As String = "iTextSharp.text.Font.FontFamily." & cmbFont.Text
-                        'Dim selectedFontName As String = cmbFont.SelectedItem.ToString()
-                        ' Determinar la familia de fuentes seleccionada en el ComboBox
-                        ' Determinar la familia de fuentes seleccionada en el ComboBox
-                        ' Determinar la familia de fuentes seleccionada en el ComboBox
-                        Dim selectedFontFamily As iTextSharp.text.Font.FontFamily
-                        Dim fontStyle As Integer = iTextSharp.text.Font.NORMAL ' Estilo predeterminado: Normal
-
-                        If cmbFont.SelectedItem IsNot Nothing Then
-                            Dim selectedFontName As String = cmbFont.SelectedItem.ToString() ' Renombrada a selectedFontName
-
-                            ' Determinar el tipo de fuente
-                            If selectedFontName.Contains("Courier") Then
-                                selectedFontFamily = iTextSharp.text.Font.FontFamily.COURIER
-                            ElseIf selectedFontName.Contains("Helvetica") Then
-                                selectedFontFamily = iTextSharp.text.Font.FontFamily.HELVETICA
-                            ElseIf selectedFontName.Contains("Times-Roman") Then
-                                selectedFontFamily = iTextSharp.text.Font.FontFamily.TIMES_ROMAN
-                            Else
-                                ' Fuente predeterminada
-                                selectedFontFamily = iTextSharp.text.Font.FontFamily.COURIER
-                            End If
-
-                            ' Determinar el estilo según el texto seleccionado
-                            If cbxNegrita.Checked Then
-                                fontStyle = iTextSharp.text.Font.BOLD ' Opción combinada
-                            ElseIf selectedFontName.Contains("Italic") Then
-                                fontStyle = fontStyle Or iTextSharp.text.Font.ITALIC ' Oblique se trata como Italic
-                            End If
-                        Else
-                            ' Fuente y estilo predeterminados
-                            selectedFontFamily = iTextSharp.text.Font.FontFamily.HELVETICA
-                            fontStyle = iTextSharp.text.Font.NORMAL
-                        End If
-
-                        ' Crear la fuente con el estilo seleccionado
-                        Dim tamanofuente As Single = txtTamanoFuente.Value
-                        Dim textFont As New iTextSharp.text.Font(selectedFontFamily, tamanofuente, fontStyle) 'iTextSharp.text.Font.FontFamily.HELVETICA
-                        Dim textCell As New iTextSharp.text.pdf.PdfPCell(New iTextSharp.text.Phrase(textData, textFont))
-                        textCell.Border = iTextSharp.text.Rectangle.BOX
-                        textCell.HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER
-                        textCell.VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE
-                        table.AddCell(textCell)
-                        pdfDocument.Add(table)
-                        pdfDocument.NewPage()
-
-                        ' Actualizar la barra de progreso
-                        ProgressBar1.PerformStep()
-                        Application.DoEvents() ' Permitir que la UI se actualice
-                    End If
-                Next
-
-                pdfDocument.Close()
-            End Using
-        End Using
-
-        ' Mostrar mensaje de éxito con opción de abrir el archivo
-
-        Form2.Show()
-
-        ' Reiniciar la barra de progreso
-        ProgressBar1.Value = ProgressBar1.Minimum
-    End Sub
-
     Private Sub GenerateAndExportQRCodes()
         ' Configuración inicial de la barra de progreso
         ProgressBar1.Minimum = 0
@@ -309,7 +185,7 @@ Public Class form1
         ' Reiniciar la barra de progreso
         ProgressBar1.Value = ProgressBar1.Minimum
     End Sub
-
+    Private filactual As Integer = 0
     Private Sub UpdatePreview()
         Try
             ' Asegúrate de que los valores sean válidos antes de usarlos
@@ -349,7 +225,7 @@ Public Class form1
 
                 ' Asegúrate de que la segunda fila exista
                 If DataGridView1.Rows.Count > 1 Then
-                    Dim row As DataGridViewRow = DataGridView1.Rows(1) ' Obtén la segunda fila (índice 1)
+                    Dim row As DataGridViewRow = DataGridView1.Rows(filactual) ' Obtén la segunda fila (índice 1)
 
                     ' Concatenar los datos para el código QR
                     Dim qrData As String = String.Join(vbTab, row.Cells.Cast(Of DataGridViewCell).Select(Function(c)
@@ -404,17 +280,13 @@ Public Class form1
             pbPreview.Image = previewBitmap
             pbPreview.SizeMode = PictureBoxSizeMode.CenterImage ' Ajusta el tamaño de la imagen al centro del PictureBox
         Catch ex As Exception
-            MessageBox.Show("Ocurrió un error al actualizar la vista previa: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            MessageBox.Show("Esta es la última etiqueta de la lista.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
     End Sub
-
-
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
         ProgressBar1.Visible = True
         GenerateAndExportQRCodes()
-
     End Sub
-
     Private Sub Button3_Click_1(sender As Object, e As EventArgs) Handles Button3.Click
         OpenFileDialog1.ShowDialog()
         TextBox1.Text = OpenFileDialog1.FileName
@@ -422,9 +294,6 @@ Public Class form1
         LoadExcelData()
         UpdatePreview()
     End Sub
-
-
-
     Private Sub btnUpdatePreview_Click(sender As Object, e As EventArgs) Handles btnUpdatePreview.Click
         UpdatePreview()
 
@@ -443,7 +312,6 @@ Public Class form1
         UpdatePreview()
         conversiones()
     End Sub
-
     Private Sub txtAltoEtiq_ValueChanged(sender As Object, e As EventArgs) Handles txtAltoEtiq.ValueChanged
         ' Solo ejecuta si no estamos en el proceso de carga
         If isLoading Then Return
@@ -469,14 +337,30 @@ Public Class form1
         UpdatePreview()
     End Sub
 
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+        Dim ultimoIndice As Integer = DataGridView1.RowCount - 1
+        filactual = filactual + 1
+        UpdatePreview()
+    End Sub
 
+    Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
+        If filactual = 0 Then
+            MessageBox.Show("Esta es la primera etiqueta.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        Else
+            filactual = filactual - 1
+            UpdatePreview()
+        End If
+    End Sub
+    Private Sub Button5_Click(sender As Object, e As EventArgs) Handles Button5.Click
+        filactual = 0
+        UpdatePreview()
+    End Sub
 
+    Private Sub Button6_Click(sender As Object, e As EventArgs) Handles Button6.Click
+        Dim ultimoIndice As Integer = DataGridView1.RowCount - 1
+        filactual = ultimoIndice
 
+        UpdatePreview()
 
-
-
-    '  Private Sub updatepreview(sender As Object, e As EventArgs) Handles cbxNegrita.CheckedChanged, txtTamanoFuente.Click, cmbFont.SelectedValueChanged, txtAnchoEtiq.Click, txtAltoEtiq.Click
-    '  UpdatePreview()
-    ' End Sub
-
+    End Sub
 End Class
