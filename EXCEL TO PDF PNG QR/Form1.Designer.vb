@@ -43,11 +43,9 @@ Partial Class Form1
         txtTamanoFuente = New NumericUpDown()
         Label3 = New Label()
         GroupBox8 = New GroupBox()
-        lblcmalto = New Label()
         txtAltoEtiq = New NumericUpDown()
         Label2 = New Label()
         GroupBox7 = New GroupBox()
-        lblcmancho = New Label()
         txtAnchoEtiq = New NumericUpDown()
         Label10 = New Label()
         GroupBox6 = New GroupBox()
@@ -67,6 +65,8 @@ Partial Class Form1
         Label12 = New Label()
         Label9 = New Label()
         TabPage2 = New TabPage()
+        ComboBoxHojas = New ComboBox()
+        Label4 = New Label()
         Label1 = New Label()
         TextBox1 = New TextBox()
         Button3 = New Button()
@@ -252,7 +252,7 @@ Partial Class Form1
         ' cbxNegrita
         ' 
         cbxNegrita.AutoSize = True
-        cbxNegrita.Location = New Point(676, 41)
+        cbxNegrita.Location = New Point(611, 41)
         cbxNegrita.Name = "cbxNegrita"
         cbxNegrita.Size = New Size(68, 19)
         cbxNegrita.TabIndex = 31
@@ -263,9 +263,9 @@ Partial Class Form1
         ' 
         GroupBox10.Controls.Add(cmbFont)
         GroupBox10.Font = New Font("Segoe UI", 9F)
-        GroupBox10.Location = New Point(583, 66)
+        GroupBox10.Location = New Point(518, 66)
         GroupBox10.Name = "GroupBox10"
-        GroupBox10.Size = New Size(161, 41)
+        GroupBox10.Size = New Size(182, 41)
         GroupBox10.TabIndex = 29
         GroupBox10.TabStop = False
         GroupBox10.Text = "Fuente:"
@@ -274,7 +274,7 @@ Partial Class Form1
         ' 
         cmbFont.FormattingEnabled = True
         cmbFont.Items.AddRange(New Object() {"Helvetica", "Helvetica Italic", "Courier Prime", "Times-Roman", "Times-Roman Italic"})
-        cmbFont.Location = New Point(3, 14)
+        cmbFont.Location = New Point(6, 13)
         cmbFont.Name = "cmbFont"
         cmbFont.Size = New Size(156, 23)
         cmbFont.TabIndex = 30
@@ -285,7 +285,7 @@ Partial Class Form1
         GroupBox9.Controls.Add(Label5)
         GroupBox9.Controls.Add(txtTamanoFuente)
         GroupBox9.Font = New Font("Segoe UI", 9F)
-        GroupBox9.Location = New Point(583, 24)
+        GroupBox9.Location = New Point(518, 24)
         GroupBox9.Name = "GroupBox9"
         GroupBox9.Size = New Size(87, 42)
         GroupBox9.TabIndex = 25
@@ -314,7 +314,7 @@ Partial Class Form1
         ' 
         Label3.AutoSize = True
         Label3.Font = New Font("Segoe UI", 9F, FontStyle.Bold)
-        Label3.Location = New Point(583, 11)
+        Label3.Location = New Point(518, 11)
         Label3.Name = "Label3"
         Label3.Size = New Size(42, 15)
         Label3.TabIndex = 27
@@ -322,111 +322,94 @@ Partial Class Form1
         ' 
         ' GroupBox8
         ' 
-        GroupBox8.Controls.Add(lblcmalto)
         GroupBox8.Controls.Add(txtAltoEtiq)
         GroupBox8.Controls.Add(Label2)
         GroupBox8.Font = New Font("Segoe UI", 9F)
         GroupBox8.Location = New Point(6, 66)
         GroupBox8.Name = "GroupBox8"
-        GroupBox8.Size = New Size(168, 41)
+        GroupBox8.Size = New Size(105, 41)
         GroupBox8.TabIndex = 26
         GroupBox8.TabStop = False
         GroupBox8.Text = "Alto:"
         ' 
-        ' lblcmalto
-        ' 
-        lblcmalto.AutoSize = True
-        lblcmalto.Font = New Font("Segoe UI", 9F)
-        lblcmalto.Location = New Point(81, 19)
-        lblcmalto.Name = "lblcmalto"
-        lblcmalto.Size = New Size(39, 15)
-        lblcmalto.TabIndex = 31
-        lblcmalto.Text = "00 cm"
-        ' 
         ' txtAltoEtiq
         ' 
+        txtAltoEtiq.DecimalPlaces = 2
+        txtAltoEtiq.Increment = New Decimal(New Integer() {1, 0, 0, 65536})
         txtAltoEtiq.Location = New Point(5, 15)
-        txtAltoEtiq.Maximum = New Decimal(New Integer() {1000, 0, 0, 0})
-        txtAltoEtiq.Minimum = New Decimal(New Integer() {20, 0, 0, 0})
+        txtAltoEtiq.Maximum = New Decimal(New Integer() {30, 0, 0, 0})
+        txtAltoEtiq.Minimum = New Decimal(New Integer() {5, 0, 0, 0})
         txtAltoEtiq.Name = "txtAltoEtiq"
-        txtAltoEtiq.Size = New Size(46, 23)
+        txtAltoEtiq.Size = New Size(53, 23)
         txtAltoEtiq.TabIndex = 30
-        txtAltoEtiq.Value = New Decimal(New Integer() {390, 0, 0, 0})
+        txtAltoEtiq.Value = New Decimal(New Integer() {15, 0, 0, 0})
         ' 
         ' Label2
         ' 
         Label2.AutoSize = True
         Label2.Font = New Font("Segoe UI", 9F)
-        Label2.Location = New Point(53, 19)
+        Label2.Location = New Point(64, 19)
         Label2.Name = "Label2"
-        Label2.Size = New Size(29, 15)
+        Label2.Size = New Size(24, 15)
         Label2.TabIndex = 9
-        Label2.Text = "pt ="
+        Label2.Text = "cm"
         ' 
         ' GroupBox7
         ' 
-        GroupBox7.Controls.Add(lblcmancho)
         GroupBox7.Controls.Add(txtAnchoEtiq)
         GroupBox7.Controls.Add(Label10)
         GroupBox7.Font = New Font("Segoe UI", 9F)
         GroupBox7.Location = New Point(5, 24)
         GroupBox7.Name = "GroupBox7"
-        GroupBox7.Size = New Size(169, 42)
+        GroupBox7.Size = New Size(106, 42)
         GroupBox7.TabIndex = 25
         GroupBox7.TabStop = False
         GroupBox7.Text = "Ancho:"
         ' 
-        ' lblcmancho
-        ' 
-        lblcmancho.AutoSize = True
-        lblcmancho.Font = New Font("Segoe UI", 9F)
-        lblcmancho.Location = New Point(82, 18)
-        lblcmancho.Name = "lblcmancho"
-        lblcmancho.Size = New Size(39, 15)
-        lblcmancho.TabIndex = 30
-        lblcmancho.Text = "00 cm"
-        ' 
         ' txtAnchoEtiq
         ' 
+        txtAnchoEtiq.DecimalPlaces = 2
+        txtAnchoEtiq.Increment = New Decimal(New Integer() {1, 0, 0, 65536})
         txtAnchoEtiq.Location = New Point(6, 14)
-        txtAnchoEtiq.Maximum = New Decimal(New Integer() {1000, 0, 0, 0})
-        txtAnchoEtiq.Minimum = New Decimal(New Integer() {20, 0, 0, 0})
+        txtAnchoEtiq.Maximum = New Decimal(New Integer() {30, 0, 0, 0})
+        txtAnchoEtiq.Minimum = New Decimal(New Integer() {5, 0, 0, 0})
         txtAnchoEtiq.Name = "txtAnchoEtiq"
-        txtAnchoEtiq.Size = New Size(46, 23)
+        txtAnchoEtiq.Size = New Size(53, 23)
         txtAnchoEtiq.TabIndex = 29
-        txtAnchoEtiq.Value = New Decimal(New Integer() {300, 0, 0, 0})
+        txtAnchoEtiq.Value = New Decimal(New Integer() {10, 0, 0, 0})
         ' 
         ' Label10
         ' 
         Label10.AutoSize = True
         Label10.Font = New Font("Segoe UI", 9F)
-        Label10.Location = New Point(54, 18)
+        Label10.Location = New Point(65, 17)
         Label10.Name = "Label10"
-        Label10.Size = New Size(29, 15)
+        Label10.Size = New Size(24, 15)
         Label10.TabIndex = 9
-        Label10.Text = "pt ="
+        Label10.Text = "cm"
         ' 
         ' GroupBox6
         ' 
         GroupBox6.Controls.Add(txtMargenes)
         GroupBox6.Controls.Add(Label8)
         GroupBox6.Font = New Font("Segoe UI", 9F)
-        GroupBox6.Location = New Point(185, 25)
+        GroupBox6.Location = New Point(120, 25)
         GroupBox6.Name = "GroupBox6"
-        GroupBox6.Size = New Size(183, 41)
+        GroupBox6.Size = New Size(114, 41)
         GroupBox6.TabIndex = 26
         GroupBox6.TabStop = False
         GroupBox6.Text = "Al rededor"
         ' 
         ' txtMargenes
         ' 
+        txtMargenes.DecimalPlaces = 2
+        txtMargenes.Increment = New Decimal(New Integer() {1, 0, 0, 65536})
         txtMargenes.Location = New Point(3, 13)
-        txtMargenes.Maximum = New Decimal(New Integer() {1000, 0, 0, 0})
-        txtMargenes.Minimum = New Decimal(New Integer() {2, 0, 0, 0})
+        txtMargenes.Maximum = New Decimal(New Integer() {10, 0, 0, 0})
         txtMargenes.Name = "txtMargenes"
         txtMargenes.Size = New Size(46, 23)
         txtMargenes.TabIndex = 31
-        txtMargenes.Value = New Decimal(New Integer() {20, 0, 0, 0})
+        txtMargenes.Value = New Decimal(New Integer() {15, 0, 0, 65536})
         ' 
         ' Label8
         ' 
@@ -434,9 +417,9 @@ Partial Class Form1
         Label8.Font = New Font("Segoe UI", 9F)
         Label8.Location = New Point(51, 18)
         Label8.Name = "Label8"
-        Label8.Size = New Size(43, 15)
+        Label8.Size = New Size(24, 15)
         Label8.TabIndex = 8
-        Label8.Text = "pixeles"
+        Label8.Text = "cm"
         ' 
         ' GroupBox4
         ' 
@@ -445,7 +428,7 @@ Partial Class Form1
         GroupBox4.Controls.Add(RadioButton6)
         GroupBox4.Controls.Add(Label14)
         GroupBox4.Font = New Font("Segoe UI", 9F)
-        GroupBox4.Location = New Point(379, 66)
+        GroupBox4.Location = New Point(314, 66)
         GroupBox4.Name = "GroupBox4"
         GroupBox4.Size = New Size(192, 41)
         GroupBox4.TabIndex = 25
@@ -494,7 +477,7 @@ Partial Class Form1
         Label14.Font = New Font("Segoe UI", 9F)
         Label14.Location = New Point(108, 16)
         Label14.Name = "Label14"
-        Label14.Size = New Size(20, 15)
+        Label14.Size = New Size(19, 15)
         Label14.TabIndex = 17
         Label14.Text = "px"
         ' 
@@ -505,7 +488,7 @@ Partial Class Form1
         GroupBox3.Controls.Add(RadioButton3)
         GroupBox3.Controls.Add(Label15)
         GroupBox3.Font = New Font("Segoe UI", 9F)
-        GroupBox3.Location = New Point(379, 24)
+        GroupBox3.Location = New Point(314, 24)
         GroupBox3.Name = "GroupBox3"
         GroupBox3.Size = New Size(192, 42)
         GroupBox3.TabIndex = 24
@@ -554,7 +537,7 @@ Partial Class Form1
         Label15.Font = New Font("Segoe UI", 9F)
         Label15.Location = New Point(108, 15)
         Label15.Name = "Label15"
-        Label15.Size = New Size(20, 15)
+        Label15.Size = New Size(19, 15)
         Label15.TabIndex = 17
         Label15.Text = "px"
         ' 
@@ -562,7 +545,7 @@ Partial Class Form1
         ' 
         Label13.AutoSize = True
         Label13.Font = New Font("Segoe UI", 9F, FontStyle.Bold)
-        Label13.Location = New Point(374, 11)
+        Label13.Location = New Point(309, 11)
         Label13.Name = "Label13"
         Label13.Size = New Size(93, 15)
         Label13.TabIndex = 14
@@ -572,7 +555,7 @@ Partial Class Form1
         ' 
         Label12.AutoSize = True
         Label12.Font = New Font("Segoe UI", 9F, FontStyle.Bold)
-        Label12.Location = New Point(185, 10)
+        Label12.Location = New Point(120, 10)
         Label12.Name = "Label12"
         Label12.Size = New Size(65, 15)
         Label12.TabIndex = 13
@@ -590,6 +573,8 @@ Partial Class Form1
         ' 
         ' TabPage2
         ' 
+        TabPage2.Controls.Add(ComboBoxHojas)
+        TabPage2.Controls.Add(Label4)
         TabPage2.Controls.Add(Label1)
         TabPage2.Controls.Add(TextBox1)
         TabPage2.Controls.Add(Button3)
@@ -602,12 +587,29 @@ Partial Class Form1
         TabPage2.Text = "Datos"
         TabPage2.UseVisualStyleBackColor = True
         ' 
+        ' ComboBoxHojas
+        ' 
+        ComboBoxHojas.FormattingEnabled = True
+        ComboBoxHojas.Location = New Point(8, 93)
+        ComboBoxHojas.Name = "ComboBoxHojas"
+        ComboBoxHojas.Size = New Size(174, 23)
+        ComboBoxHojas.TabIndex = 11
+        ' 
+        ' Label4
+        ' 
+        Label4.AutoSize = True
+        Label4.Location = New Point(8, 75)
+        Label4.Name = "Label4"
+        Label4.Size = New Size(104, 15)
+        Label4.TabIndex = 10
+        Label4.Text = "Selecciona la hoja:"
+        ' 
         ' Label1
         ' 
         Label1.AutoSize = True
         Label1.Location = New Point(8, 16)
         Label1.Name = "Label1"
-        Label1.Size = New Size(286, 15)
+        Label1.Size = New Size(284, 15)
         Label1.TabIndex = 7
         Label1.Text = "Selecciona un archivo de Excel para extraer los datos:"
         ' 
@@ -634,9 +636,9 @@ Partial Class Form1
         DataGridView1.Anchor = AnchorStyles.Top Or AnchorStyles.Bottom Or AnchorStyles.Left Or AnchorStyles.Right
         DataGridView1.BackgroundColor = SystemColors.ControlLight
         DataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        DataGridView1.Location = New Point(3, 84)
+        DataGridView1.Location = New Point(3, 122)
         DataGridView1.Name = "DataGridView1"
-        DataGridView1.Size = New Size(803, 598)
+        DataGridView1.Size = New Size(803, 560)
         DataGridView1.TabIndex = 2
         ' 
         ' TabControl1
@@ -745,11 +747,9 @@ Partial Class Form1
     Friend WithEvents txtTamanoFuente As NumericUpDown
     Friend WithEvents Label3 As Label
     Friend WithEvents GroupBox8 As GroupBox
-    Friend WithEvents lblcmalto As Label
     Friend WithEvents txtAltoEtiq As NumericUpDown
     Friend WithEvents Label2 As Label
     Friend WithEvents GroupBox7 As GroupBox
-    Friend WithEvents lblcmancho As Label
     Friend WithEvents txtAnchoEtiq As NumericUpDown
     Friend WithEvents Label10 As Label
     Friend WithEvents GroupBox6 As GroupBox
@@ -776,6 +776,8 @@ Partial Class Form1
     Friend WithEvents DataGridView1 As DataGridView
     Friend WithEvents TabControl1 As TabControl
     Friend WithEvents GroupBox11 As GroupBox
+    Friend WithEvents Label4 As Label
+    Friend WithEvents ComboBoxHojas As ComboBox
 
 
 End Class
