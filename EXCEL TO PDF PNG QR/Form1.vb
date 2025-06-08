@@ -137,8 +137,18 @@ Public Class form1
                             Dim anchoDisponible As Single = pdfDocument.PageSize.Width - pdfDocument.LeftMargin - pdfDocument.RightMargin
 
                             ' Ajustar el tamaño del QR al 100% del ancho disponible en la celda
-                            qrImage.ScaleAbsolute(anchoDisponible, anchoDisponible) ' Cuadrado: ancho = alto
+                            Dim qrSize As Single
 
+                            If RadioButtonQRFullSize.Checked Then
+                                qrSize = anchoDisponible ' 100% del ancho
+                                NumericQRWidth.Enabled = False
+                            ElseIf RadioButtonQRCustom.Checked Then
+                                NumericQRWidth.Enabled = True
+                                ' Convertir cm a puntos (1 cm = 72 / 2.54 puntos)
+                                qrSize = (NumericQRWidth.Value / 2.54) * 72
+                            End If
+
+                            qrImage.ScaleAbsolute(qrSize, qrSize)
                             ' Crear una tabla para organizar el QR y el texto
                             Dim table As New iTextSharp.text.pdf.PdfPTable(1)
                             table.WidthPercentage = 100
@@ -152,13 +162,26 @@ Public Class form1
                             table.AddCell(qrCell)
 
                             ' Concatenar los datos para el texto
-                            Dim textData As String = String.Join(" | ", row.Cells.Cast(Of DataGridViewCell).Select(Function(c)
-                                                                                                                       If c.Value IsNot Nothing Then
-                                                                                                                           Return c.Value.ToString()
-                                                                                                                       Else
-                                                                                                                           Return String.Empty
-                                                                                                                       End If
-                                                                                                                   End Function))
+                            'Dim textData As String = String.Join(" | ", row.Cells.Cast(Of DataGridViewCell).Select(Function(c)
+                            'If c.Value IsNot Nothing Then
+                            '     Return c.Value.ToString()
+                            '  Else
+                            '       Return String.Empty
+                            '    End If
+                            ' End Function))
+                            ' Construir el texto con encabezado y valor por cada celda
+                            Dim textBuilder As New System.Text.StringBuilder()
+                            For Each cell As DataGridViewCell In row.Cells
+                                If cell.Value IsNot Nothing Then
+                                    Dim columnName As String = DataGridView1.Columns(cell.ColumnIndex).HeaderText
+                                    Dim cellValue As String = cell.Value.ToString()
+
+                                    textBuilder.AppendLine(columnName)
+                                    textBuilder.AppendLine(cellValue)
+                                End If
+                            Next
+
+                            Dim textData As String = textBuilder.ToString().TrimEnd()
 
                             ' Determinar la familia de fuentes seleccionada en el ComboBox
                             Dim selectedFontFamily As iTextSharp.text.Font.FontFamily
@@ -191,11 +214,39 @@ Public Class form1
 
                             ' Crear la fuente con el estilo seleccionado
                             Dim tamanofuente As Single = txtTamanoFuente.Value
+                            Dim tamanofuenteheader As Single = txttamanoheader.Value
                             Dim textFont As New iTextSharp.text.Font(selectedFontFamily, tamanofuente, fontStyle)
-                            Dim textCell As New iTextSharp.text.pdf.PdfPCell(New iTextSharp.text.Phrase(textData, textFont))
+                            'Dim textCell As New iTextSharp.text.pdf.PdfPCell(New iTextSharp.text.Phrase(textData, textFont))
+                            ' Crear estilos separados para encabezados y datos
+                            Dim negritaheader As Integer = iTextSharp.text.Font.NORMAL ' Estilo predeterminado: Normal
+                            If cbxnegritaheader.Checked Then
+                                negritaheader = iTextSharp.text.Font.BOLD
+                            End If
+                            Dim headerFont As New iTextSharp.text.Font(iTextSharp.text.Font.FontFamily.HELVETICA, tamanofuenteheader, negritaheader)
+                            Dim valueFont As New iTextSharp.text.Font(selectedFontFamily, tamanofuente, fontStyle)
+
+                            Dim phrase As New iTextSharp.text.Phrase()
+
+                            For Each cell As DataGridViewCell In row.Cells
+                                If cell.Value IsNot Nothing Then
+                                    Dim columnName As String = DataGridView1.Columns(cell.ColumnIndex).HeaderText
+                                    Dim cellValue As String = cell.Value.ToString()
+
+                                    ' Encabezado en negrita
+                                    phrase.Add(New iTextSharp.text.Chunk(columnName & vbLf, headerFont))
+                                    ' Valor en fuente normal
+                                    phrase.Add(New iTextSharp.text.Chunk(cellValue & vbLf, valueFont))
+                                End If
+                            Next
+
+                            Dim textCell As New iTextSharp.text.pdf.PdfPCell(phrase)
                             textCell.Border = iTextSharp.text.Rectangle.BOX
-                            textCell.HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER
-                            textCell.VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE
+                            textCell.HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT
+                            textCell.VerticalAlignment = iTextSharp.text.Element.ALIGN_TOP
+
+                            'textCell.Border = iTextSharp.text.Rectangle.BOX
+                            'textCell.HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER
+                            'textCell.VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE
                             table.AddCell(textCell)
                             pdfDocument.Add(table)
                             pdfDocument.NewPage()
@@ -231,11 +282,14 @@ Public Class form1
     End Sub
     Private filactual As Integer = 0
     Private Sub UpdatePreview()
-        Dim dpiX As Single
+        If isLoading Then Exit Sub ' ⛔ Previene ejecución prematura
+        If DataGridView1.Rows.Count = 0 OrElse filactual >= DataGridView1.Rows.Count Then Exit Sub
 
+        Dim dpiX As Single
         Using g As Graphics = Me.CreateGraphics()
             dpiX = g.DpiX / 2.54
         End Using
+
         Try
             ' Asegúrate de que los valores sean válidos antes de usarlos
             Dim altoetiqueta As Integer = Convert.ToInt32(txtAltoEtiq.Value * dpiX)
@@ -257,8 +311,13 @@ Public Class form1
             End If
 
             ' Calcular el tamaño disponible para el QR
-            Dim qrWidth As Integer = anchoetiqueta - 2 * margenes
-            Dim qrHeight As Integer = qrWidth ' Mantener proporción cuadrada para el QR
+            Dim qrWidth As Integer
+            If RadioButtonQRFullSize.Checked Then
+                qrWidth = anchoetiqueta - 2 * margenes
+            Else
+                qrWidth = Convert.ToInt32(NumericQRWidth.Value * dpiX)
+            End If
+            Dim qrHeight As Integer = qrWidth ' Cuadrado
 
             ' Crear un bitmap para la etiqueta
             Dim previewBitmap As New Bitmap(anchoetiqueta, altoetiqueta)
@@ -294,34 +353,44 @@ Public Class form1
                     Dim qrImage As Bitmap = qrCode.GetGraphic(20, Color.Black, Color.White, drawQuietZones:=0)
                     g.DrawImage(qrImage, margenes, margenes, qrWidth, qrHeight) ' Dibujar QR ajustado a los márgenes
 
-                    ' Concatenar texto
-                    Dim textData As String = String.Join(" | ", row.Cells.Cast(Of DataGridViewCell).Select(Function(c)
-                                                                                                               If c.Value IsNot Nothing Then
-                                                                                                                   Return c.Value.ToString()
-                                                                                                               Else
-                                                                                                                   Return String.Empty
-                                                                                                               End If
-                                                                                                           End Function))
+                    Dim textMargin As Integer = margenes + qrHeight + 10
+                    Dim xTexto As Single = margenes
+                    Dim yTexto As Single = textMargin
+                    Dim anchoTexto As Single = anchoetiqueta - 2 * margenes
 
-                    ' Dibujar el texto de la etiqueta debajo del código QR
-                    Dim textMargin As Integer = margenes + qrHeight + 10 ' Margen para el texto (después del QR)
-                    Dim fontStylo As FontStyle = FontStyle.Regular  ' Estilo por defecto
+                    ' Fuente para encabezados
+                    Dim headerFontStyle As FontStyle = FontStyle.Regular
+                    If cbxnegritaheader.Checked Then headerFontStyle = FontStyle.Bold
+                    Dim headerFont As New System.Drawing.Font("Helvetica", txttamanoheader.Value, headerFontStyle)
 
-                    ' Si el CheckBox está marcado, aplicar negrita
-                    If cbxNegrita.Checked Then
-                        fontStylo = FontStyle.Bold
-                    End If
-                    Dim font As New System.Drawing.Font(cmbFont.Text, txtTamanoFuente.Value, fontStylo)
+                    ' Fuente para valores
+                    Dim bodyFontStyle As FontStyle = FontStyle.Regular
+                    If cbxNegrita.Checked Then bodyFontStyle = FontStyle.Bold
+                    Dim bodyFont As New System.Drawing.Font(cmbFont.Text, txtTamanoFuente.Value, bodyFontStyle)
 
-                    ' Crear un área delimitada para el texto (bajo el QR)
-                    Dim textRectangle As New RectangleF(margenes, textMargin, anchoetiqueta - 2 * margenes, altoetiqueta - textMargin - margenes)
+                    ' Pincel de texto
+                    Dim brush As Brush = Brushes.Black
 
-                    ' Dibujar el texto en el área delimitada con saltos de línea automáticos
-                    Dim stringFormat As New StringFormat()
-                    stringFormat.Alignment = StringAlignment.Center ' Alinear texto horizontalmente al centro
-                    stringFormat.LineAlignment = StringAlignment.Near ' Alinear texto verticalmente desde la parte superior
+                    ' Recorrer cada celda
+                    For Each cell As DataGridViewCell In row.Cells
+                        If cell.Value IsNot Nothing Then
+                            Dim columnName As String = DataGridView1.Columns(cell.ColumnIndex).HeaderText
+                            Dim cellValue As String = cell.Value.ToString()
 
-                    g.DrawString(textData, font, Brushes.Black, textRectangle, stringFormat)
+                            ' Medir altura de cada bloque de texto para ir sumando Y
+                            Dim headerSize As SizeF = g.MeasureString(columnName, headerFont, CInt(anchoTexto))
+                            Dim valueSize As SizeF = g.MeasureString(cellValue, bodyFont, CInt(anchoTexto))
+
+                            ' Dibujar encabezado
+                            g.DrawString(columnName, headerFont, brush, New RectangleF(xTexto, yTexto, anchoTexto, headerSize.Height))
+                            yTexto += headerSize.Height
+
+                            ' Dibujar valor
+                            g.DrawString(cellValue, bodyFont, brush, New RectangleF(xTexto, yTexto, anchoTexto, valueSize.Height))
+                            yTexto += valueSize.Height
+                        End If
+                    Next
+
                 End If
             End Using
 
@@ -340,7 +409,7 @@ Public Class form1
         LoadExcelData()
         UpdatePreview()
     End Sub
-    Private Sub btnUpdatePreview_Click(sender As Object, e As EventArgs) Handles btnUpdatePreview.Click
+    Private Sub btnUpdatePreview_Click(sender As Object, e As EventArgs)
         UpdatePreview()
 
     End Sub
@@ -427,6 +496,36 @@ Public Class form1
 
     Private Sub ComboBoxHojas_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ComboBoxHojas.SelectedIndexChanged
         CargarHoja()
+        UpdatePreview()
     End Sub
 
+    Private Sub cbxnegritaheader_CheckedChanged(sender As Object, e As EventArgs) Handles cbxnegritaheader.CheckedChanged
+        UpdatePreview()
+    End Sub
+
+    Private Sub txttamanoheader_ValueChanged(sender As Object, e As EventArgs) Handles txttamanoheader.ValueChanged
+        UpdatePreview()
+    End Sub
+
+    Private Sub NumericQRWidth_ValueChanged(sender As Object, e As EventArgs) Handles NumericQRWidth.ValueChanged
+        UpdatePreview()
+    End Sub
+
+    Private Sub RadioButtonQRCustom_CheckedChanged(sender As Object, e As EventArgs) Handles RadioButtonQRCustom.CheckedChanged
+        UpdatePreview()
+        If RadioButtonQRFullSize.Checked = True Then
+            NumericQRWidth.Enabled = False
+        Else
+            NumericQRWidth.Enabled = True
+        End If
+    End Sub
+
+    Private Sub RadioButtonQRFullSize_CheckedChanged(sender As Object, e As EventArgs) Handles RadioButtonQRFullSize.CheckedChanged
+        UpdatePreview()
+        If RadioButtonQRFullSize.Checked = True Then
+            NumericQRWidth.Enabled = False
+        Else
+            NumericQRWidth.Enabled = True
+        End If
+    End Sub
 End Class

@@ -32,12 +32,16 @@ Partial Class Form1
         Button5 = New Button()
         Button4 = New Button()
         Button1 = New Button()
-        btnUpdatePreview = New Button()
         pbPreview = New PictureBox()
         GroupBox1 = New GroupBox()
+        cbxnegritaheader = New CheckBox()
         cbxNegrita = New CheckBox()
         GroupBox10 = New GroupBox()
         cmbFont = New ComboBox()
+        GroupBox13 = New GroupBox()
+        Label6 = New Label()
+        txttamanoheader = New NumericUpDown()
+        Label11 = New Label()
         GroupBox9 = New GroupBox()
         Label5 = New Label()
         txtTamanoFuente = New NumericUpDown()
@@ -51,15 +55,10 @@ Partial Class Form1
         GroupBox6 = New GroupBox()
         txtMargenes = New NumericUpDown()
         Label8 = New Label()
-        GroupBox4 = New GroupBox()
-        txtQRAlto = New TextBox()
-        RadioButton5 = New RadioButton()
-        RadioButton6 = New RadioButton()
-        Label14 = New Label()
         GroupBox3 = New GroupBox()
-        txtQRAncho = New TextBox()
-        RadioButton1 = New RadioButton()
-        RadioButton3 = New RadioButton()
+        NumericQRWidth = New NumericUpDown()
+        RadioButtonQRFullSize = New RadioButton()
+        RadioButtonQRCustom = New RadioButton()
         Label15 = New Label()
         Label13 = New Label()
         Label12 = New Label()
@@ -81,6 +80,8 @@ Partial Class Form1
         CType(pbPreview, ComponentModel.ISupportInitialize).BeginInit()
         GroupBox1.SuspendLayout()
         GroupBox10.SuspendLayout()
+        GroupBox13.SuspendLayout()
+        CType(txttamanoheader, ComponentModel.ISupportInitialize).BeginInit()
         GroupBox9.SuspendLayout()
         CType(txtTamanoFuente, ComponentModel.ISupportInitialize).BeginInit()
         GroupBox8.SuspendLayout()
@@ -89,8 +90,8 @@ Partial Class Form1
         CType(txtAnchoEtiq, ComponentModel.ISupportInitialize).BeginInit()
         GroupBox6.SuspendLayout()
         CType(txtMargenes, ComponentModel.ISupportInitialize).BeginInit()
-        GroupBox4.SuspendLayout()
         GroupBox3.SuspendLayout()
+        CType(NumericQRWidth, ComponentModel.ISupportInitialize).BeginInit()
         TabPage2.SuspendLayout()
         CType(DataGridView1, ComponentModel.ISupportInitialize).BeginInit()
         TabControl1.SuspendLayout()
@@ -109,7 +110,7 @@ Partial Class Form1
         TabPage3.Location = New Point(4, 24)
         TabPage3.Name = "TabPage3"
         TabPage3.Padding = New Padding(3)
-        TabPage3.Size = New Size(809, 685)
+        TabPage3.Size = New Size(809, 780)
         TabPage3.TabIndex = 2
         TabPage3.Text = "Propiedades de la Etiqueta"
         TabPage3.UseVisualStyleBackColor = True
@@ -118,7 +119,7 @@ Partial Class Form1
         ' 
         GroupBox11.Controls.Add(Button2)
         GroupBox11.Dock = DockStyle.Bottom
-        GroupBox11.Location = New Point(3, 627)
+        GroupBox11.Location = New Point(3, 722)
         GroupBox11.Name = "GroupBox11"
         GroupBox11.Size = New Size(803, 55)
         GroupBox11.TabIndex = 18
@@ -149,11 +150,10 @@ Partial Class Form1
         GroupBox2.Controls.Add(Button5)
         GroupBox2.Controls.Add(Button4)
         GroupBox2.Controls.Add(Button1)
-        GroupBox2.Controls.Add(btnUpdatePreview)
         GroupBox2.Controls.Add(pbPreview)
         GroupBox2.Location = New Point(3, 129)
         GroupBox2.Name = "GroupBox2"
-        GroupBox2.Size = New Size(803, 503)
+        GroupBox2.Size = New Size(803, 548)
         GroupBox2.TabIndex = 13
         GroupBox2.TabStop = False
         GroupBox2.Text = "Vista previa de la etiqueta:"
@@ -162,7 +162,7 @@ Partial Class Form1
         ' 
         Button6.Anchor = AnchorStyles.Bottom
         Button6.Font = New Font("Segoe UI", 11F)
-        Button6.Location = New Point(452, 455)
+        Button6.Location = New Point(452, 500)
         Button6.Name = "Button6"
         Button6.Size = New Size(38, 40)
         Button6.TabIndex = 17
@@ -173,7 +173,7 @@ Partial Class Form1
         ' 
         Button5.Anchor = AnchorStyles.Bottom
         Button5.Font = New Font("Segoe UI", 11F)
-        Button5.Location = New Point(320, 455)
+        Button5.Location = New Point(320, 500)
         Button5.Name = "Button5"
         Button5.Size = New Size(38, 40)
         Button5.TabIndex = 16
@@ -184,7 +184,7 @@ Partial Class Form1
         ' 
         Button4.Anchor = AnchorStyles.Bottom
         Button4.Font = New Font("Segoe UI", 11F)
-        Button4.Location = New Point(364, 455)
+        Button4.Location = New Point(364, 500)
         Button4.Name = "Button4"
         Button4.Size = New Size(38, 40)
         Button4.TabIndex = 15
@@ -195,22 +195,12 @@ Partial Class Form1
         ' 
         Button1.Anchor = AnchorStyles.Bottom
         Button1.Font = New Font("Segoe UI", 11F)
-        Button1.Location = New Point(408, 455)
+        Button1.Location = New Point(408, 500)
         Button1.Name = "Button1"
         Button1.Size = New Size(38, 40)
         Button1.TabIndex = 14
         Button1.Text = "▶️"
         Button1.UseVisualStyleBackColor = True
-        ' 
-        ' btnUpdatePreview
-        ' 
-        btnUpdatePreview.Anchor = AnchorStyles.Bottom Or AnchorStyles.Right
-        btnUpdatePreview.Location = New Point(685, 460)
-        btnUpdatePreview.Name = "btnUpdatePreview"
-        btnUpdatePreview.Size = New Size(103, 32)
-        btnUpdatePreview.TabIndex = 14
-        btnUpdatePreview.Text = "Actualizar"
-        btnUpdatePreview.UseVisualStyleBackColor = True
         ' 
         ' pbPreview
         ' 
@@ -219,7 +209,7 @@ Partial Class Form1
         pbPreview.Dock = DockStyle.Fill
         pbPreview.Location = New Point(3, 19)
         pbPreview.Name = "pbPreview"
-        pbPreview.Size = New Size(797, 481)
+        pbPreview.Size = New Size(797, 526)
         pbPreview.SizeMode = PictureBoxSizeMode.CenterImage
         pbPreview.TabIndex = 12
         pbPreview.TabStop = False
@@ -227,14 +217,16 @@ Partial Class Form1
         ' GroupBox1
         ' 
         GroupBox1.AutoSize = True
+        GroupBox1.Controls.Add(cbxnegritaheader)
         GroupBox1.Controls.Add(cbxNegrita)
         GroupBox1.Controls.Add(GroupBox10)
+        GroupBox1.Controls.Add(GroupBox13)
+        GroupBox1.Controls.Add(Label11)
         GroupBox1.Controls.Add(GroupBox9)
         GroupBox1.Controls.Add(Label3)
         GroupBox1.Controls.Add(GroupBox8)
         GroupBox1.Controls.Add(GroupBox7)
         GroupBox1.Controls.Add(GroupBox6)
-        GroupBox1.Controls.Add(GroupBox4)
         GroupBox1.Controls.Add(GroupBox3)
         GroupBox1.Controls.Add(Label13)
         GroupBox1.Controls.Add(Label12)
@@ -245,14 +237,26 @@ Partial Class Form1
         GroupBox1.Margin = New Padding(1)
         GroupBox1.Name = "GroupBox1"
         GroupBox1.Padding = New Padding(0)
-        GroupBox1.Size = New Size(803, 126)
+        GroupBox1.Size = New Size(803, 131)
         GroupBox1.TabIndex = 9
         GroupBox1.TabStop = False
+        ' 
+        ' cbxnegritaheader
+        ' 
+        cbxnegritaheader.AutoSize = True
+        cbxnegritaheader.Location = New Point(694, 47)
+        cbxnegritaheader.Name = "cbxnegritaheader"
+        cbxnegritaheader.Size = New Size(68, 19)
+        cbxnegritaheader.TabIndex = 35
+        cbxnegritaheader.Text = "Negrita"
+        cbxnegritaheader.UseVisualStyleBackColor = True
         ' 
         ' cbxNegrita
         ' 
         cbxNegrita.AutoSize = True
-        cbxNegrita.Location = New Point(611, 41)
+        cbxNegrita.Checked = True
+        cbxNegrita.CheckState = CheckState.Checked
+        cbxNegrita.Location = New Point(506, 46)
         cbxNegrita.Name = "cbxNegrita"
         cbxNegrita.Size = New Size(68, 19)
         cbxNegrita.TabIndex = 31
@@ -263,9 +267,9 @@ Partial Class Form1
         ' 
         GroupBox10.Controls.Add(cmbFont)
         GroupBox10.Font = New Font("Segoe UI", 9F)
-        GroupBox10.Location = New Point(518, 66)
+        GroupBox10.Location = New Point(413, 71)
         GroupBox10.Name = "GroupBox10"
-        GroupBox10.Size = New Size(182, 41)
+        GroupBox10.Size = New Size(161, 41)
         GroupBox10.TabIndex = 29
         GroupBox10.TabStop = False
         GroupBox10.Text = "Fuente:"
@@ -276,16 +280,57 @@ Partial Class Form1
         cmbFont.Items.AddRange(New Object() {"Helvetica", "Helvetica Italic", "Courier Prime", "Times-Roman", "Times-Roman Italic"})
         cmbFont.Location = New Point(6, 13)
         cmbFont.Name = "cmbFont"
-        cmbFont.Size = New Size(156, 23)
+        cmbFont.Size = New Size(149, 23)
         cmbFont.TabIndex = 30
         cmbFont.Text = "Helvetica"
+        ' 
+        ' GroupBox13
+        ' 
+        GroupBox13.Controls.Add(Label6)
+        GroupBox13.Controls.Add(txttamanoheader)
+        GroupBox13.Font = New Font("Segoe UI", 9F)
+        GroupBox13.Location = New Point(601, 30)
+        GroupBox13.Name = "GroupBox13"
+        GroupBox13.Size = New Size(87, 42)
+        GroupBox13.TabIndex = 32
+        GroupBox13.TabStop = False
+        GroupBox13.Text = "Tamaño:"
+        ' 
+        ' Label6
+        ' 
+        Label6.AutoSize = True
+        Label6.Font = New Font("Segoe UI", 9F)
+        Label6.Location = New Point(65, 17)
+        Label6.Name = "Label6"
+        Label6.Size = New Size(18, 15)
+        Label6.TabIndex = 17
+        Label6.Text = "pt"
+        ' 
+        ' txttamanoheader
+        ' 
+        txttamanoheader.Location = New Point(6, 13)
+        txttamanoheader.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
+        txttamanoheader.Name = "txttamanoheader"
+        txttamanoheader.Size = New Size(53, 23)
+        txttamanoheader.TabIndex = 28
+        txttamanoheader.Value = New Decimal(New Integer() {10, 0, 0, 0})
+        ' 
+        ' Label11
+        ' 
+        Label11.AutoSize = True
+        Label11.Font = New Font("Segoe UI", 9F, FontStyle.Bold)
+        Label11.Location = New Point(601, 17)
+        Label11.Name = "Label11"
+        Label11.Size = New Size(80, 15)
+        Label11.TabIndex = 33
+        Label11.Text = "Encabezados:"
         ' 
         ' GroupBox9
         ' 
         GroupBox9.Controls.Add(Label5)
         GroupBox9.Controls.Add(txtTamanoFuente)
         GroupBox9.Font = New Font("Segoe UI", 9F)
-        GroupBox9.Location = New Point(518, 24)
+        GroupBox9.Location = New Point(413, 29)
         GroupBox9.Name = "GroupBox9"
         GroupBox9.Size = New Size(87, 42)
         GroupBox9.TabIndex = 25
@@ -305,6 +350,7 @@ Partial Class Form1
         ' txtTamanoFuente
         ' 
         txtTamanoFuente.Location = New Point(6, 13)
+        txtTamanoFuente.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
         txtTamanoFuente.Name = "txtTamanoFuente"
         txtTamanoFuente.Size = New Size(53, 23)
         txtTamanoFuente.TabIndex = 28
@@ -314,11 +360,11 @@ Partial Class Form1
         ' 
         Label3.AutoSize = True
         Label3.Font = New Font("Segoe UI", 9F, FontStyle.Bold)
-        Label3.Location = New Point(518, 11)
+        Label3.Location = New Point(413, 16)
         Label3.Name = "Label3"
         Label3.Size = New Size(42, 15)
         Label3.TabIndex = 27
-        Label3.Text = "Texto:"
+        Label3.Text = "Datos:"
         ' 
         ' GroupBox8
         ' 
@@ -415,137 +461,77 @@ Partial Class Form1
         ' 
         Label8.AutoSize = True
         Label8.Font = New Font("Segoe UI", 9F)
-        Label8.Location = New Point(51, 18)
+        Label8.Location = New Point(84, 18)
         Label8.Name = "Label8"
         Label8.Size = New Size(24, 15)
         Label8.TabIndex = 8
         Label8.Text = "cm"
         ' 
-        ' GroupBox4
-        ' 
-        GroupBox4.Controls.Add(txtQRAlto)
-        GroupBox4.Controls.Add(RadioButton5)
-        GroupBox4.Controls.Add(RadioButton6)
-        GroupBox4.Controls.Add(Label14)
-        GroupBox4.Font = New Font("Segoe UI", 9F)
-        GroupBox4.Location = New Point(314, 66)
-        GroupBox4.Name = "GroupBox4"
-        GroupBox4.Size = New Size(192, 41)
-        GroupBox4.TabIndex = 25
-        GroupBox4.TabStop = False
-        GroupBox4.Text = "Alto:"
-        ' 
-        ' txtQRAlto
-        ' 
-        txtQRAlto.Font = New Font("Segoe UI", 9F)
-        txtQRAlto.Location = New Point(75, 11)
-        txtQRAlto.Margin = New Padding(3, 0, 3, 0)
-        txtQRAlto.MaxLength = 4
-        txtQRAlto.Name = "txtQRAlto"
-        txtQRAlto.Size = New Size(32, 23)
-        txtQRAlto.TabIndex = 16
-        txtQRAlto.Text = "10"
-        ' 
-        ' RadioButton5
-        ' 
-        RadioButton5.AutoSize = True
-        RadioButton5.Checked = True
-        RadioButton5.Font = New Font("Segoe UI", 9F)
-        RadioButton5.Location = New Point(4, 14)
-        RadioButton5.Margin = New Padding(1)
-        RadioButton5.Name = "RadioButton5"
-        RadioButton5.Size = New Size(51, 19)
-        RadioButton5.TabIndex = 15
-        RadioButton5.TabStop = True
-        RadioButton5.Text = "Auto"
-        RadioButton5.UseVisualStyleBackColor = True
-        ' 
-        ' RadioButton6
-        ' 
-        RadioButton6.AutoSize = True
-        RadioButton6.Font = New Font("Segoe UI", 9F)
-        RadioButton6.Location = New Point(59, 18)
-        RadioButton6.Margin = New Padding(1)
-        RadioButton6.Name = "RadioButton6"
-        RadioButton6.Size = New Size(14, 13)
-        RadioButton6.TabIndex = 22
-        RadioButton6.UseVisualStyleBackColor = True
-        ' 
-        ' Label14
-        ' 
-        Label14.AutoSize = True
-        Label14.Font = New Font("Segoe UI", 9F)
-        Label14.Location = New Point(108, 16)
-        Label14.Name = "Label14"
-        Label14.Size = New Size(19, 15)
-        Label14.TabIndex = 17
-        Label14.Text = "px"
-        ' 
         ' GroupBox3
         ' 
-        GroupBox3.Controls.Add(txtQRAncho)
-        GroupBox3.Controls.Add(RadioButton1)
-        GroupBox3.Controls.Add(RadioButton3)
+        GroupBox3.Controls.Add(NumericQRWidth)
+        GroupBox3.Controls.Add(RadioButtonQRFullSize)
+        GroupBox3.Controls.Add(RadioButtonQRCustom)
         GroupBox3.Controls.Add(Label15)
         GroupBox3.Font = New Font("Segoe UI", 9F)
-        GroupBox3.Location = New Point(314, 24)
+        GroupBox3.Location = New Point(245, 24)
         GroupBox3.Name = "GroupBox3"
-        GroupBox3.Size = New Size(192, 42)
+        GroupBox3.Size = New Size(157, 38)
         GroupBox3.TabIndex = 24
         GroupBox3.TabStop = False
         GroupBox3.Text = "Ancho:"
         ' 
-        ' txtQRAncho
+        ' NumericQRWidth
         ' 
-        txtQRAncho.Font = New Font("Segoe UI", 9F)
-        txtQRAncho.Location = New Point(75, 10)
-        txtQRAncho.Margin = New Padding(3, 0, 3, 0)
-        txtQRAncho.MaxLength = 4
-        txtQRAncho.Name = "txtQRAncho"
-        txtQRAncho.Size = New Size(32, 23)
-        txtQRAncho.TabIndex = 16
-        txtQRAncho.Text = "10"
+        NumericQRWidth.DecimalPlaces = 2
+        NumericQRWidth.Increment = New Decimal(New Integer() {1, 0, 0, 65536})
+        NumericQRWidth.Location = New Point(75, 11)
+        NumericQRWidth.Minimum = New Decimal(New Integer() {5, 0, 0, 65536})
+        NumericQRWidth.Name = "NumericQRWidth"
+        NumericQRWidth.Size = New Size(53, 23)
+        NumericQRWidth.TabIndex = 29
+        NumericQRWidth.Value = New Decimal(New Integer() {5, 0, 0, 0})
         ' 
-        ' RadioButton1
+        ' RadioButtonQRFullSize
         ' 
-        RadioButton1.AutoSize = True
-        RadioButton1.Checked = True
-        RadioButton1.Font = New Font("Segoe UI", 9F)
-        RadioButton1.Location = New Point(4, 14)
-        RadioButton1.Margin = New Padding(1)
-        RadioButton1.Name = "RadioButton1"
-        RadioButton1.Size = New Size(53, 19)
-        RadioButton1.TabIndex = 15
-        RadioButton1.TabStop = True
-        RadioButton1.Text = "100%"
-        RadioButton1.UseVisualStyleBackColor = True
+        RadioButtonQRFullSize.AutoSize = True
+        RadioButtonQRFullSize.Checked = True
+        RadioButtonQRFullSize.Font = New Font("Segoe UI", 9F)
+        RadioButtonQRFullSize.Location = New Point(4, 14)
+        RadioButtonQRFullSize.Margin = New Padding(1)
+        RadioButtonQRFullSize.Name = "RadioButtonQRFullSize"
+        RadioButtonQRFullSize.Size = New Size(53, 19)
+        RadioButtonQRFullSize.TabIndex = 15
+        RadioButtonQRFullSize.TabStop = True
+        RadioButtonQRFullSize.Text = "100%"
+        RadioButtonQRFullSize.UseVisualStyleBackColor = True
         ' 
-        ' RadioButton3
+        ' RadioButtonQRCustom
         ' 
-        RadioButton3.AutoSize = True
-        RadioButton3.Font = New Font("Segoe UI", 9F)
-        RadioButton3.Location = New Point(59, 17)
-        RadioButton3.Margin = New Padding(1)
-        RadioButton3.Name = "RadioButton3"
-        RadioButton3.Size = New Size(14, 13)
-        RadioButton3.TabIndex = 22
-        RadioButton3.UseVisualStyleBackColor = True
+        RadioButtonQRCustom.AutoSize = True
+        RadioButtonQRCustom.Font = New Font("Segoe UI", 9F)
+        RadioButtonQRCustom.Location = New Point(59, 17)
+        RadioButtonQRCustom.Margin = New Padding(1)
+        RadioButtonQRCustom.Name = "RadioButtonQRCustom"
+        RadioButtonQRCustom.Size = New Size(14, 13)
+        RadioButtonQRCustom.TabIndex = 22
+        RadioButtonQRCustom.UseVisualStyleBackColor = True
         ' 
         ' Label15
         ' 
         Label15.AutoSize = True
         Label15.Font = New Font("Segoe UI", 9F)
-        Label15.Location = New Point(108, 15)
+        Label15.Location = New Point(127, 14)
         Label15.Name = "Label15"
-        Label15.Size = New Size(19, 15)
+        Label15.Size = New Size(24, 15)
         Label15.TabIndex = 17
-        Label15.Text = "px"
+        Label15.Text = "cm"
         ' 
         ' Label13
         ' 
         Label13.AutoSize = True
         Label13.Font = New Font("Segoe UI", 9F, FontStyle.Bold)
-        Label13.Location = New Point(309, 11)
+        Label13.Location = New Point(240, 11)
         Label13.Name = "Label13"
         Label13.Size = New Size(93, 15)
         Label13.TabIndex = 14
@@ -582,7 +568,7 @@ Partial Class Form1
         TabPage2.Location = New Point(4, 24)
         TabPage2.Name = "TabPage2"
         TabPage2.Padding = New Padding(3)
-        TabPage2.Size = New Size(809, 685)
+        TabPage2.Size = New Size(809, 780)
         TabPage2.TabIndex = 1
         TabPage2.Text = "Datos"
         TabPage2.UseVisualStyleBackColor = True
@@ -638,7 +624,7 @@ Partial Class Form1
         DataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize
         DataGridView1.Location = New Point(3, 122)
         DataGridView1.Name = "DataGridView1"
-        DataGridView1.Size = New Size(803, 560)
+        DataGridView1.Size = New Size(803, 655)
         DataGridView1.TabIndex = 2
         ' 
         ' TabControl1
@@ -649,7 +635,7 @@ Partial Class Form1
         TabControl1.Location = New Point(0, 0)
         TabControl1.Name = "TabControl1"
         TabControl1.SelectedIndex = 0
-        TabControl1.Size = New Size(817, 713)
+        TabControl1.Size = New Size(817, 808)
         TabControl1.TabIndex = 12
         ' 
         ' ProgressBar1
@@ -677,7 +663,7 @@ Partial Class Form1
         GroupBox5.Controls.Add(Label7)
         GroupBox5.Controls.Add(ProgressBar1)
         GroupBox5.Dock = DockStyle.Bottom
-        GroupBox5.Location = New Point(0, 710)
+        GroupBox5.Location = New Point(0, 805)
         GroupBox5.Name = "GroupBox5"
         GroupBox5.Size = New Size(817, 56)
         GroupBox5.TabIndex = 13
@@ -687,7 +673,7 @@ Partial Class Form1
         ' 
         AutoScaleDimensions = New SizeF(7F, 15F)
         AutoScaleMode = AutoScaleMode.Font
-        ClientSize = New Size(817, 766)
+        ClientSize = New Size(817, 861)
         Controls.Add(GroupBox5)
         Controls.Add(TabControl1)
         Icon = CType(resources.GetObject("$this.Icon"), Icon)
@@ -702,6 +688,9 @@ Partial Class Form1
         GroupBox1.ResumeLayout(False)
         GroupBox1.PerformLayout()
         GroupBox10.ResumeLayout(False)
+        GroupBox13.ResumeLayout(False)
+        GroupBox13.PerformLayout()
+        CType(txttamanoheader, ComponentModel.ISupportInitialize).EndInit()
         GroupBox9.ResumeLayout(False)
         GroupBox9.PerformLayout()
         CType(txtTamanoFuente, ComponentModel.ISupportInitialize).EndInit()
@@ -714,10 +703,9 @@ Partial Class Form1
         GroupBox6.ResumeLayout(False)
         GroupBox6.PerformLayout()
         CType(txtMargenes, ComponentModel.ISupportInitialize).EndInit()
-        GroupBox4.ResumeLayout(False)
-        GroupBox4.PerformLayout()
         GroupBox3.ResumeLayout(False)
         GroupBox3.PerformLayout()
+        CType(NumericQRWidth, ComponentModel.ISupportInitialize).EndInit()
         TabPage2.ResumeLayout(False)
         TabPage2.PerformLayout()
         CType(DataGridView1, ComponentModel.ISupportInitialize).EndInit()
@@ -736,7 +724,6 @@ Partial Class Form1
     Friend WithEvents Button5 As Button
     Friend WithEvents Button4 As Button
     Friend WithEvents Button1 As Button
-    Friend WithEvents btnUpdatePreview As Button
     Friend WithEvents pbPreview As PictureBox
     Friend WithEvents GroupBox1 As GroupBox
     Friend WithEvents cbxNegrita As CheckBox
@@ -755,15 +742,9 @@ Partial Class Form1
     Friend WithEvents GroupBox6 As GroupBox
     Friend WithEvents txtMargenes As NumericUpDown
     Friend WithEvents Label8 As Label
-    Friend WithEvents GroupBox4 As GroupBox
-    Friend WithEvents txtQRAlto As TextBox
-    Friend WithEvents RadioButton5 As RadioButton
-    Friend WithEvents RadioButton6 As RadioButton
-    Friend WithEvents Label14 As Label
     Friend WithEvents GroupBox3 As GroupBox
-    Friend WithEvents txtQRAncho As TextBox
-    Friend WithEvents RadioButton1 As RadioButton
-    Friend WithEvents RadioButton3 As RadioButton
+    Friend WithEvents RadioButtonQRFullSize As RadioButton
+    Friend WithEvents RadioButtonQRCustom As RadioButton
     Friend WithEvents Label15 As Label
     Friend WithEvents Label13 As Label
     Friend WithEvents Label12 As Label
@@ -778,6 +759,12 @@ Partial Class Form1
     Friend WithEvents GroupBox11 As GroupBox
     Friend WithEvents Label4 As Label
     Friend WithEvents ComboBoxHojas As ComboBox
+    Friend WithEvents cbxnegritaheader As CheckBox
+    Friend WithEvents GroupBox13 As GroupBox
+    Friend WithEvents Label6 As Label
+    Friend WithEvents txttamanoheader As NumericUpDown
+    Friend WithEvents Label11 As Label
+    Friend WithEvents NumericQRWidth As NumericUpDown
 
 
 End Class
